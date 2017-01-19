@@ -132,9 +132,6 @@ XT = X_train[trainidx, :, :, :]
 # Pre-train the discriminator network ...
 noise_gen = np.random.uniform(0, 1, size=[XT.shape[0], 100])
 generated_images = generator.predict(noise_gen)
-print(XT.shape[0])
-print(XT.shape)
-print(generated_images.shape)
 X = np.concatenate((XT, generated_images))
 n = XT.shape[0]
 y = np.zeros([2 * n, 2])
