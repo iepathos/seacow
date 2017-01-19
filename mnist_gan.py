@@ -1,4 +1,9 @@
 #!/usr/bin/env python
+"""
+Original code for MNIST GAN from https://github.com/osh/KerasGAN/
+
+Fixed code and made to work with tensorflow by Glen Baker <iepathos@gmail.com>
+"""
 import random
 import numpy as np
 from keras.layers import Input
@@ -23,8 +28,8 @@ img_rows, img_cols = 28, 28
 # the data, shuffled and split between train and test sets
 (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-X_train = X_train.reshape(X_train.shape[0], 1, img_rows, img_cols)
-X_test = X_test.reshape(X_test.shape[0], 1, img_rows, img_cols)
+X_train = X_train.reshape(X_train.shape[0], img_rows, img_cols, 1)
+X_test = X_test.reshape(X_test.shape[0], img_rows, img_cols, 1)
 X_train = X_train.astype('float32')
 X_test = X_test.astype('float32')
 X_train /= 255
@@ -43,7 +48,7 @@ def make_trainable(net, val):
         l.trainable = val
 
 
-shp = reversed(X_train.shape[1:])
+shp = X_train.shape[1:]
 dropout_rate = 0.25
 opt = Adam(lr=1e-4)
 dopt = Adam(lr=1e-3)
@@ -127,6 +132,7 @@ XT = X_train[trainidx, :, :, :]
 # Pre-train the discriminator network ...
 noise_gen = np.random.uniform(0, 1, size=[XT.shape[0], 100])
 generated_images = generator.predict(noise_gen)
+print(XT.shape[0])
 print(XT.shape)
 print(generated_images.shape)
 X = np.concatenate((XT, generated_images))
