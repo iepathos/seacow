@@ -6,6 +6,7 @@ Fixed code and made to work with tensorflow by Glen Baker <iepathos@gmail.com>
 """
 import random
 import numpy as np
+import keras.backend as K
 from keras.layers import Input
 from keras.layers.core import Reshape,Dense,Dropout,Activation,Flatten,MaxoutDense
 from keras.layers.advanced_activations import LeakyReLU
@@ -192,13 +193,13 @@ def train_for_n(nb_epoch=5000, plt_frq=25, BATCH_SIZE=32):
 train_for_n(nb_epoch=6000, plt_frq=500, BATCH_SIZE=32)
 
 # Train for 2000 epochs at reduced learning rates
-opt.lr.set_value(1e-5)
-dopt.lr.set_value(1e-4)
+K.set_value(opt.lr, 1e-5)
+K.set_value(dopt.lr, 1e-4)
 train_for_n(nb_epoch=2000, plt_frq=500, BATCH_SIZE=32)
 
 # Train for 2000 epochs at reduced learning rates
-opt.lr.set_value(1e-6)
-dopt.lr.set_value(1e-5)
+K.set_value(opt.lr, 1e-6)
+K.set_value(dopt.lr, 1e-5)
 train_for_n(nb_epoch=2000, plt_frq=500, BATCH_SIZE=32)
 
 # Plot the final loss curves
