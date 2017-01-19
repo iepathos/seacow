@@ -104,11 +104,11 @@ GAN.summary()
 
 
 def plot_loss(losses):
-        plt.figure(figsize=(10, 8))
-        plt.plot(losses["d"], label='discriminitive loss')
-        plt.plot(losses["g"], label='generative loss')
-        plt.legend()
-        plt.show()
+    plt.figure(figsize=(10, 8))
+    plt.plot(losses["d"], label='discriminitive loss')
+    plt.plot(losses["g"], label='generative loss')
+    plt.legend()
+    plt.show()
 
 
 def plot_gen(n_ex=16, dim=(4, 4), figsize=(10, 10)):
@@ -211,14 +211,14 @@ plot_loss(losses)
 plot_gen(25, (5, 5), (12, 12))
 
 
-def plot_real(n_ex=16, dim=(4, 4), figsize=(10, 10) ):
-    idx = np.random.randint(0,X_train.shape[0], n_ex)
+def plot_real(n_ex=16, dim=(4, 4), figsize=(10, 10)):
+    idx = np.random.randint(0, X_train.shape[0], n_ex)
     generated_images = X_train[idx, :, :, :]
 
     plt.figure(figsize=figsize)
     for i in range(generated_images.shape[0]):
         plt.subplot(dim[0],dim[1],i+1)
-        img = generated_images[i,0,:,:]
+        img = generated_images[i, 0, :, :]
         plt.imshow(img)
         plt.axis('off')
     plt.tight_layout()
